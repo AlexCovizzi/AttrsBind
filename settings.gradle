@@ -1,1 +1,1 @@
-include ':compiler', ':annotations', ':attrsbind', ':sample'
+include ':attrsbind-compiler', ':attrsbind-annotations', ':attrsbind', ':sample'

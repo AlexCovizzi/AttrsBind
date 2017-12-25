@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AttrsBind.iml" filepath="$PROJECT_DIR$/AttrsBind.iml" />
-      <module fileurl="file://$PROJECT_DIR$/annotations/annotations.iml" filepath="$PROJECT_DIR$/annotations/annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/attrsbind/attrsbind.iml" filepath="$PROJECT_DIR$/attrsbind/attrsbind.iml" />
-      <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/attrsbind-annotations/attrsbind-annotations.iml" filepath="$PROJECT_DIR$/attrsbind-annotations/attrsbind-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/attrsbind-compiler/attrsbind-compiler.iml" filepath="$PROJECT_DIR$/attrsbind-compiler/attrsbind-compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
