@@ -13,6 +13,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
@@ -50,8 +51,6 @@ public class Processor extends AbstractProcessor {
     
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment env) {
-    
-        projPackage = ProjectPackageFinder.search(elUtils, env);
         
         AttrFieldMap attrFieldMap = processBindAttr(env);
         for(Map.Entry<String, Set<AttrField>> entry : attrFieldMap.entrySet()) {
@@ -71,7 +70,14 @@ public class Processor extends AbstractProcessor {
         for (Element element : env.getElementsAnnotatedWith(BindAttr.class)) {
             if(!validateFieldElement(element)) continue;
             
-            String classFullName = element.getEnclosingElement().asType().toString();
+            Element enclosingElement = element.getEnclosingElement();
+            
+            // if not found continue to search for the R class
+            if(projPackage == null) {
+                projPackage = ProjectPackageFinder.search(elUtils, (PackageElement)enclosingElement.getEnclosingElement());
+            }
+            
+            String classFullName = enclosingElement.asType().toString();
             
             BindAttr annotation = element.getAnnotation(BindAttr.class);
             String fieldName = element.toString();
@@ -79,11 +85,14 @@ public class Processor extends AbstractProcessor {
             String attrName = annotation.name();
             String defValue = annotation.def();
             
-            if(attrName.isEmpty()) attrName = fieldName;
-            
             AttrField attrField = new AttrField(fieldName, fieldType, attrName, defValue);
             
             attrFieldMap.put(classFullName, attrField);
+        }
+        
+        if(projPackage == null) {
+            projPackage = ProjectPackageFinder.search(elUtils, env);
+            if(projPackage == null) Log.e(getClass(), "Project package not found.");
         }
         
         return attrFieldMap;
