@@ -18,7 +18,7 @@ import com.alexcovizzi.attrsbind.annotations.BindAttr;
 
 public class CustomTextView extends TextView {
     
-    @BindAttr(def="0x001") int rotation;
+    @BindAttr(def="#001") int rotation;
     
     public CustomTextView(Context context) {
         super(context);
