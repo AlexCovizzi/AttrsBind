@@ -3,6 +3,8 @@ package com.alexcovizzi.attrsbind.compiler;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 
+import static com.alexcovizzi.attrsbind.compiler.AnnotationValidation.validateAttrName;
+
 /**
  * Created by Alex on 03/12/2017.
  */
@@ -18,6 +20,8 @@ public class AttrField {
         this.fieldType = fieldType;
         this.attrName = attrName;
         this.defValue = defValue;
+        
+        if(!validateAttrName(attrName)) this.attrName = fieldName;
     }
     
     public String getFieldName() {
@@ -34,11 +38,5 @@ public class AttrField {
     
     public String getDefValue() {
         return defValue;
-    }
-    
-    public CodeBlock getBindingCode(ClassName rClass) {
-        CodeBlock.Builder builder = CodeBlock.builder();
-        
-        return builder.build();
     }
 }
