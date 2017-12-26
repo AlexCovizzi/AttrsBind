@@ -34,35 +34,35 @@ class Log {
         return this;
     }
     
-    public static void d(Class cls, String msg) {
+    public static void d(Class cls, Object msg) {
         getInstance().log(DEBUG, cls, msg);
     }
     
-    public static void d(String tag, String msg) {
+    public static void d(String tag, Object msg) {
         getInstance().log(DEBUG, tag, msg);
     }
     
-    public static void w(Class cls, String msg) {
+    public static void w(Class cls, Object msg) {
         getInstance().log(WARNING, cls, msg);
     }
     
-    public static void w(String tag, String msg) {
+    public static void w(String tag, Object msg) {
         getInstance().log(WARNING, tag, msg);
     }
     
-    public static void e(Class cls, String msg) {
+    public static void e(Class cls, Object msg) {
         getInstance().log(ERROR, cls, msg);
     }
     
-    public static void e(String tag, String msg) {
+    public static void e(String tag, Object msg) {
         getInstance().log(ERROR, tag, msg);
     }
     
-    private void log(int level, Class cls, String msg) {
+    private void log(int level, Class cls, Object msg) {
         log(level, cls.getCanonicalName(), msg);
     }
     
-    private void log(int level, String tag, String msg) {
+    private void log(int level, String tag, Object msg) {
         if(messager == null) throw new NullPointerException("Log : Messager must be set.");
         String tg = tag+" : ";
         Diagnostic.Kind kind = Diagnostic.Kind.ERROR;
@@ -70,7 +70,7 @@ class Log {
         if(level == 0) kind = Diagnostic.Kind.NOTE;
         
         if(this.level <= level) {
-            messager.printMessage(kind, tg + msg);
+            messager.printMessage(kind, tg + msg.toString());
         }
     }
 }
